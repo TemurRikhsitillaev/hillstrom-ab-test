@@ -88,7 +88,7 @@ hillstrom-ab-test/
 ├── images/                     # charts used in this README
 ├── notebook/
 │   └── hillstrom_ab_test.ipynb # full analysis, steps 1–10
-├── outputs/                    # result tables (CSV) for the dashboard
+├── outputs/                    # result tables (CSV)
 ├── data_dictionary.md
 ├── requirements.txt
 └── README.md
@@ -108,7 +108,3 @@ Run all cells from top to bottom. The notebook reads `../data/hillstrom.csv` and
 ## Tools
 
 Python: pandas, NumPy, SciPy, statsmodels, matplotlib, seaborn.
-
-## Dashboard
-
-Tableau Public dashboard — in progress.
