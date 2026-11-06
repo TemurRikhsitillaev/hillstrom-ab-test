@@ -1,100 +1,100 @@
-# Email Campaign A/B/C Test Analysis (Hillstrom)
+# Анализ A/B/C-теста email-рассылки (Hillstrom)
 
-Analysis of a randomized email experiment by an online clothing retailer: 64,000 customers were split into three groups —
-**men's email**, **women's email** and **no email** (control) — and tracked for two weeks.
+Анализ рандомизированного эксперимента с email-рассылкой интернет-магазина одежды: 64 000 клиентов разделили на три группы —
+**мужское письмо**, **женское письмо** и **без письма** (контроль) — и наблюдали за ними две недели.
 
-**Business question:** should the retailer send the email, and if so, which version and to whom?
+**Бизнес-вопрос:** стоит ли магазину отправлять рассылку, и если да, то какую версию и кому?
 
-## Key results
+## Ключевые результаты
 
-| Metric | No E-Mail | Women's email | Men's email |
+| Метрика | Без письма | Женское письмо | Мужское письмо |
 |---|---|---|---|
-| Visit rate | 10.62% | 15.14% | **18.28%** |
-| Conversion rate | 0.57% | 0.88% | **1.25%** |
-| Revenue per customer | 0.65 USD | 1.08 USD | **1.42 USD** |
+| Доля визитов | 10,62% | 15,14% | **18,28%** |
+| Конверсия | 0,57% | 0,88% | **1,25%** |
+| Выручка на клиента | 0,65 USD | 1,08 USD | **1,42 USD** |
 
-| Comparison | Conversion | Visits | Revenue per customer |
+| Сравнение | Конверсия | Визиты | Выручка на клиента |
 |---|---|---|---|
-| Men's − control | **+0.68 p.p.** (+119%), p < 0.001 | **+7.66 p.p.**, p < 0.001 | **+0.77 USD** (+118%), p < 0.001 |
-| Women's − control | **+0.31 p.p.** (+54%), p < 0.001 | **+4.52 p.p.**, p < 0.001 | **+0.42 USD** (+65%), p = 0.001 |
-| Men's − women's | **+0.37 p.p.** (+42%), p < 0.001 | **+3.14 p.p.**, p < 0.001 | +0.35 USD, p = 0.031 — not significant |
+| Мужское − контроль | **+0,68 п.п.** (+119%), p < 0,001 | **+7,66 п.п.**, p < 0,001 | **+0,77 USD** (+118%), p < 0,001 |
+| Женское − контроль | **+0,31 п.п.** (+54%), p < 0,001 | **+4,52 п.п.**, p < 0,001 | **+0,42 USD** (+65%), p = 0,001 |
+| Мужское − женское | **+0,37 п.п.** (+42%), p < 0,001 | **+3,14 п.п.**, p < 0,001 | +0,35 USD, p = 0,031 — не значимо |
 
-Significance threshold: 0.05 / 3 ≈ 0.0167 (Bonferroni correction for three comparisons).
+Порог значимости: 0,05 / 3 ≈ 0,0167 (поправка Бонферрони на три сравнения).
 
-- **Both emails work**: they increase visits, conversion and revenue per customer.
-- **The men's email is the strongest**: it is significantly better than the women's email on visits and conversion; on revenue it is also higher, but the difference is not significant.
-- **The revenue lift comes from more buyers, not bigger orders**: average order value does not change (about 114–122 USD in all groups).
-- **The men's email works in almost every segment**, including customers who bought only women's products. The women's email works only for **new customers** and **women's-only buyers**.
+- **Оба письма работают**: они увеличивают визиты, конверсию и выручку на клиента.
+- **Мужское письмо — самое сильное**: оно значимо лучше женского по визитам и конверсии; по выручке оно тоже выше, но разница не значима.
+- **Рост выручки идёт за счёт большего числа покупателей, а не более крупных заказов**: средний чек не меняется (около 114–122 USD во всех группах).
+- **Мужское письмо работает почти во всех сегментах**, включая клиентов, покупавших только женские товары. Женское письмо работает только для **новых клиентов** и **покупателей только женских товаров**.
 
-![Rates by group](images/rates_by_group.png)
+![Показатели по группам](images/rates_by_group.png)
 
-![Conversion difference](images/conversion_differences.png)
+![Разница в конверсии](images/conversion_differences.png)
 
-## Recommendation
+## Рекомендация
 
-1. **Send the men's email to all customers.** Per 1,000 emails it brings about **+770 USD** in extra revenue (interval 422 to 1,118 USD), compared with +424 USD for the women's email.
-2. Do not use the women's email as the main campaign; test it separately only for new customers and women's-only buyers.
-3. Next experiment: a new version of the women's email, because it has no visible effect on existing customers.
+1. **Отправлять мужское письмо всем клиентам.** На 1 000 писем оно приносит около **+770 USD** дополнительной выручки (интервал от 422 до 1 118 USD) против +424 USD у женского письма.
+2. Не использовать женское письмо как основную рассылку; протестировать его отдельно только для новых клиентов и покупателей только женских товаров.
+3. Следующий эксперимент: новая версия женского письма, так как на существующих клиентов оно заметного эффекта не оказывает.
 
-With an assumed 40% margin and 10 USD per 1,000 emails sending cost, both emails pay off even at the lower bound of the interval.
+При допущении о марже 40% и стоимости отправки 10 USD за 1 000 писем оба письма окупаются даже на нижней границе интервала.
 
-## Methods
+## Методы
 
-| Step | What was done |
+| Шаг | Что сделано |
 |---|---|
-| 2. Data quality check | types, missing values, value ranges, logical consistency, duplicates |
-| 3. Descriptive statistics | rates by group, mean / median / mode / percentiles of revenue, histogram, boxplot |
-| 4. Randomization check | sample ratio mismatch (z-test and exact binomial test vs 1/3), group balance on pre-experiment attributes |
-| 5. Test power | minimum detectable effect (MDE) for conversion and visits at 80% power |
-| 6. Proportion tests | two-proportion z-test and confidence intervals, checked with `statsmodels` |
-| 7. Revenue tests | Welch t-test, bootstrap confidence interval, Mann–Whitney, average order value |
-| 8. Segment analysis | effect of each email by customer segment, 26 comparisons with Bonferroni correction |
-| 9. Business conclusion | extra visitors, buyers, revenue and profit per 1,000 emails |
-| 10. Comparison | results compared with the winning entry of the original 2008 challenge |
+| 2. Проверка качества данных | типы, пропуски, диапазоны значений, логическая согласованность, дубликаты |
+| 3. Описательная статистика | показатели по группам, среднее / медиана / мода / перцентили выручки, гистограмма, boxplot |
+| 4. Проверка рандомизации | sample ratio mismatch (z-тест и точный биномиальный тест против 1/3), баланс групп по признакам до эксперимента |
+| 5. Мощность теста | минимальный обнаружимый эффект (MDE) для конверсии и визитов при мощности 80% |
+| 6. Тесты долей | z-тест для двух долей и доверительные интервалы, сверка со `statsmodels` |
+| 7. Тесты выручки | t-тест Уэлча, бутстреп-интервал, Манна–Уитни, средний чек |
+| 8. Сегментный анализ | эффект каждого письма по сегментам клиентов, 26 сравнений с поправкой Бонферрони |
+| 9. Бизнес-вывод | дополнительные посетители, покупатели, выручка и прибыль на 1 000 писем |
+| 10. Сравнение | результаты сопоставлены с победившим решением исходного конкурса 2008 года |
 
-![Segments](images/segments_conversion.png)
+![Сегменты](images/segments_conversion.png)
 
-## Comparison with other analyses
+## Сравнение с другими анализами
 
-The overall results match exactly the [Stochastic Solutions uplift modelling paper](https://www.stochasticsolutions.com/pdf/HillstromChallenge.pdf)
-that won the [MineThatData challenge](https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html):
-men's email +7.66 p.p. visits, +0.68 p.p. conversion and +0.77 USD per customer; women's email +4.52 p.p., +0.31 p.p. and +0.42 USD.
-Both analyses find the strongest men's email effect among multichannel customers with high past-year spend, and a women's email effect among new customers.
-They used uplift modelling to choose target customers; this project uses significance tests with confidence intervals, which also shows
-that the revenue difference between the two emails is not significant.
+Общие результаты в точности совпадают со [статьёй Stochastic Solutions об uplift-моделировании](https://www.stochasticsolutions.com/pdf/HillstromChallenge.pdf),
+победившей в [конкурсе MineThatData](https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html):
+мужское письмо +7,66 п.п. визитов, +0,68 п.п. конверсии и +0,77 USD на клиента; женское письмо +4,52 п.п., +0,31 п.п. и +0,42 USD.
+Оба анализа находят самый сильный эффект мужского письма у мультиканальных клиентов с высокими тратами за прошлый год, а эффект женского письма — у новых клиентов.
+Авторы статьи использовали uplift-моделирование для выбора целевых клиентов; в этом проекте используются тесты значимости с доверительными интервалами, что также показывает,
+что разница в выручке между двумя письмами не значима.
 
-## Limitations
+## Ограничения
 
-- No guardrail metrics (unsubscribes, spam complaints), so the long-term cost of more email is unknown.
-- Only a two-week window; the effect may partly be purchases moved earlier in time.
-- Revenue is sales, not profit; margin and sending cost are assumptions.
-- `spend` is capped at 499 USD; the data is from 2008.
-- Segment results are exploratory and should be confirmed with a separate test.
+- Нет guardrail-метрик (отписки, жалобы на спам), поэтому долгосрочная цена дополнительных писем неизвестна.
+- Окно наблюдения — только две недели; эффект может частично объясняться тем, что покупки просто сдвинулись раньше по времени.
+- Выручка — это продажи, а не прибыль; маржа и стоимость отправки — допущения.
+- `spend` ограничен значением 499 USD; данные 2008 года.
+- Результаты по сегментам носят исследовательский характер и должны быть подтверждены отдельным тестом.
 
-## Data
+## Данные
 
-Public dataset by Kevin Hillstrom (MineThatData), 64,000 rows × 12 columns, one row per customer.
-Column descriptions: [data_dictionary.md](data_dictionary.md).
+Открытый датасет Кевина Хиллстрома (MineThatData), 64 000 строк × 12 столбцов, одна строка — один клиент.
+Описание столбцов: [data_dictionary.md](data_dictionary.md).
 
-The CSV is not stored in the repository. Download it from the
-[MineThatData blog post](https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html)
-and save it as `data/hillstrom.csv`.
+CSV-файл не хранится в репозитории. Скачайте его со страницы
+[поста в блоге MineThatData](https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html)
+и сохраните как `data/hillstrom.csv`.
 
-## Project structure
+## Структура проекта
 
 ```
 hillstrom-ab-test/
-├── data/                       # hillstrom.csv (not in the repository)
-├── images/                     # charts used in this README
+├── data/                       # hillstrom.csv (нет в репозитории)
+├── images/                     # графики для этого README
 ├── notebook/
-│   └── hillstrom_ab_test.ipynb # full analysis, steps 1–10
-├── outputs/                    # result tables (CSV)
+│   └── hillstrom_ab_test.ipynb # полный анализ, шаги 1–10
+├── outputs/                    # таблицы с результатами (CSV)
 ├── data_dictionary.md
 ├── requirements.txt
 └── README.md
 ```
 
-## How to run
+## Как запустить
 
 ```bash
 python -m venv .venv
@@ -103,8 +103,8 @@ pip install -r requirements.txt
 jupyter notebook notebook/hillstrom_ab_test.ipynb
 ```
 
-Run all cells from top to bottom. The notebook reads `../data/hillstrom.csv` and writes charts to `images/` and tables to `outputs/`.
+Запустите все ячейки сверху вниз. Ноутбук читает `../data/hillstrom.csv` и сохраняет графики в `images/`, а таблицы — в `outputs/`.
 
-## Tools
+## Инструменты
 
 Python: pandas, NumPy, SciPy, statsmodels, matplotlib, seaborn.

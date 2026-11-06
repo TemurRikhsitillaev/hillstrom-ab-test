@@ -1,85 +1,85 @@
-# Data Dictionary: Hillstrom E-Mail Analytics
+# Словарь данных: Hillstrom E-Mail Analytics
 
-## Source
+## Источник
 
-Public dataset by Kevin Hillstrom (MineThatData), released in March 2008 as a challenge for analysts:
+Открытый датасет Кевина Хиллстрома (MineThatData), опубликованный в марте 2008 года как конкурсное задание для аналитиков:
 [The MineThatData E-Mail Analytics And Data Mining Challenge](https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html).
 
-An online clothing retailer took 64,000 customers who had bought something in the last 12 months and randomly split them into three groups:
+Интернет-магазин одежды взял 64 000 клиентов, совершавших покупки за последние 12 месяцев, и случайным образом разделил их на три группы:
 
-| Group (`segment`) | What they received | Customers |
+| Группа (`segment`) | Что получили | Клиентов |
 |---|---|---|
-| `Mens E-Mail` | email with men's products | 21,307 |
-| `Womens E-Mail` | email with women's products | 21,387 |
-| `No E-Mail` | nothing (control group) | 21,306 |
+| `Mens E-Mail` | письмо с мужскими товарами | 21 307 |
+| `Womens E-Mail` | письмо с женскими товарами | 21 387 |
+| `No E-Mail` | ничего (контрольная группа) | 21 306 |
 
-Customer behaviour was tracked for 2 weeks after the email.
+Поведение клиентов отслеживалось в течение 2 недель после рассылки.
 
-- File: `data/hillstrom.csv` (not stored in the repository)
-- Size: 64,000 rows, 12 columns
-- **One row = one customer.** Each customer is in exactly one group.
+- Файл: `data/hillstrom.csv` (не хранится в репозитории)
+- Размер: 64 000 строк, 12 столбцов
+- **Одна строка = один клиент.** Каждый клиент находится ровно в одной группе.
 
-## Columns
+## Столбцы
 
-### Customer attributes (before the experiment)
+### Признаки клиента (до эксперимента)
 
-The email could not affect these columns. They are used to check group balance and to build segments.
+Рассылка не могла повлиять на эти столбцы. Они используются для проверки баланса групп и для построения сегментов.
 
-| Column | Type | Meaning | Values |
+| Столбец | Тип | Значение | Значения |
 |---|---|---|---|
-| `recency` | integer | Months since the last purchase | 1 to 12 |
-| `history` | float | USD spent in the past 12 months | 29.99 to 3,345.93 |
-| `history_segment` | text | `history` binned into 7 ranges | `1) $0 - $100` … `7) $1,000 +` |
-| `mens` | 0 / 1 | 1 = bought men's products in the past year | 0, 1 |
-| `womens` | 0 / 1 | 1 = bought women's products in the past year | 0, 1 |
-| `zip_code` | text | Type of area where the customer lives | `Urban`, `Surburban`, `Rural` |
-| `newbie` | 0 / 1 | 1 = new customer (first purchase in the past 12 months) | 0, 1 |
-| `channel` | text | Where the customer bought in the past year | `Phone`, `Web`, `Multichannel` (both) |
+| `recency` | целое | Месяцев с последней покупки | от 1 до 12 |
+| `history` | дробное | Сумма покупок в USD за последние 12 месяцев | от 29,99 до 3 345,93 |
+| `history_segment` | текст | `history`, разбитый на 7 диапазонов | `1) $0 - $100` … `7) $1,000 +` |
+| `mens` | 0 / 1 | 1 = покупал мужские товары за последний год | 0, 1 |
+| `womens` | 0 / 1 | 1 = покупал женские товары за последний год | 0, 1 |
+| `zip_code` | текст | Тип местности, где живёт клиент | `Urban` (город), `Surburban` (пригород), `Rural` (сельская местность) |
+| `newbie` | 0 / 1 | 1 = новый клиент (первая покупка за последние 12 месяцев) | 0, 1 |
+| `channel` | текст | Где клиент покупал за последний год | `Phone` (телефон), `Web` (сайт), `Multichannel` (оба канала) |
 
-### Experiment group
+### Группа эксперимента
 
-| Column | Type | Meaning | Values |
+| Столбец | Тип | Значение | Значения |
 |---|---|---|---|
-| `segment` | text | Which email the customer received | `Mens E-Mail`, `Womens E-Mail`, `No E-Mail` |
+| `segment` | текст | Какое письмо получил клиент | `Mens E-Mail`, `Womens E-Mail`, `No E-Mail` |
 
-### Outcomes in the 2 weeks after the email (test metrics)
+### Результаты за 2 недели после рассылки (метрики теста)
 
-| Column | Type | Meaning | Values |
+| Столбец | Тип | Значение | Значения |
 |---|---|---|---|
-| `visit` | 0 / 1 | 1 = visited the website | 0, 1 |
-| `conversion` | 0 / 1 | 1 = made a purchase | 0, 1 |
-| `spend` | float | USD spent | 0 to 499; 0 for most customers |
+| `visit` | 0 / 1 | 1 = посетил сайт | 0, 1 |
+| `conversion` | 0 / 1 | 1 = совершил покупку | 0, 1 |
+| `spend` | дробное | Потрачено, USD | от 0 до 499; у большинства клиентов 0 |
 
-## Metrics calculated from the columns
+## Метрики, рассчитанные по столбцам
 
-| Metric | Formula | Role |
+| Метрика | Формула | Роль |
 |---|---|---|
-| Conversion rate | customers with `conversion = 1` / customers in the group | primary |
-| Visit rate | customers with `visit = 1` / customers in the group | secondary |
-| Revenue per customer | sum of `spend` in the group / **all** customers in the group | secondary |
-| Average order value (AOV) | sum of `spend` / buyers only | diagnostic |
+| Конверсия | клиенты с `conversion = 1` / клиенты в группе | основная |
+| Доля визитов | клиенты с `visit = 1` / клиенты в группе | вторичная |
+| Выручка на клиента | сумма `spend` в группе / **все** клиенты в группе | вторичная |
+| Средний чек (AOV) | сумма `spend` / только покупатели | диагностическая |
 
-Revenue per customer is divided by all customers in the group, including those who bought nothing.
-Dividing by buyers only gives the average order value, which is a different metric.
+Выручка на клиента делится на всех клиентов группы, включая тех, кто ничего не купил.
+Деление только на покупателей даёт средний чек — это другая метрика.
 
-## Columns added in the notebook (step 8)
+## Столбцы, добавленные в ноутбуке (шаг 8)
 
-| Column | Meaning | Values |
+| Столбец | Значение | Значения |
 |---|---|---|
-| `purchase_history` | which products the customer bought in the past year, from `mens` and `womens` | `mens only`, `womens only`, `both` |
-| `history_level` | `history` below or at/above the median | `low`, `high` |
-| `newbie_label` | `newbie` as text | `existing`, `new` |
+| `purchase_history` | какие товары клиент покупал за последний год, по `mens` и `womens` | `mens only` (только мужские), `womens only` (только женские), `both` (оба) |
+| `history_level` | `history` ниже медианы или не ниже неё | `low` (низкий), `high` (высокий) |
+| `newbie_label` | `newbie` в виде текста | `existing` (существующий), `new` (новый) |
 
-## Data notes
+## Особенности данных
 
-- **Typo in `zip_code`:** the data says `Surburban` instead of `Suburban`. Filters must use `'Surburban'`.
-- **`mens` and `womens` can both be 1** if the customer bought both kinds of products. They are never both 0.
-- **`history` and `history_segment` hold the same information.** `history` is used for calculations.
-- **No customer ID.** About 6,500 rows are exact copies of other rows. These are different customers with the same attributes and outcomes, so they are not removed.
-- **Revenue is very skewed:** 99.1% of customers spent 0, so mean revenue depends on a small number of purchases.
+- **Опечатка в `zip_code`:** в данных написано `Surburban` вместо `Suburban`. В фильтрах нужно использовать `'Surburban'`.
+- **`mens` и `womens` могут одновременно равняться 1**, если клиент покупал оба вида товаров. Одновременно 0 они не бывают никогда.
+- **`history` и `history_segment` содержат одну и ту же информацию.** Для расчётов используется `history`.
+- **Нет ID клиента.** Около 6 500 строк — точные копии других строк. Это разные клиенты с одинаковыми признаками и результатами, поэтому они не удаляются.
+- **Выручка сильно скошена:** 99,1% клиентов потратили 0, поэтому средняя выручка зависит от небольшого числа покупок.
 
-## What the data does not contain
+## Чего нет в данных
 
-- Unsubscribes or spam complaints, so no guardrail metric can be calculated.
-- Daily data: only the 2-week total, so long-term and novelty effects cannot be checked.
-- Email sending cost and profit margin: they are set as assumptions in step 9.
+- Отписок и жалоб на спам, поэтому нельзя рассчитать guardrail-метрику.
+- Ежедневных данных: есть только сумма за 2 недели, поэтому долгосрочные эффекты и эффект новизны проверить нельзя.
+- Стоимости отправки писем и маржи: они заданы как допущения на шаге 9.
